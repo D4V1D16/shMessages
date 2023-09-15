@@ -2,7 +2,7 @@
 
 ## Proyecto integrador de aula
 ---
-<p align="center"></p>
+<p align="center"><img src="https://github.com/D4V1D16/shMessages/blob/main/shMessages.png"/></p>
 
 
 
