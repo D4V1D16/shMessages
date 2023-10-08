@@ -1,0 +1,7 @@
+Este es el dataset del modelo de red neuronal:
+path para poner el archivo :  .\proyecto\ia\
+path con el archivo: .\proyecto\ia\Phishing_Email.csv
+
+
+LINK:
+https://drive.google.com/file/d/14cVQ1PUOdFK-phACEmc9hO9OmKKohc0V/view?usp=drive_link
