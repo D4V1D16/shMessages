@@ -39,31 +39,17 @@
     <div class="container d-flex flex-column align-items-center">
 
       <h1>Detector Phishing</h1>
-      <h2>Utilizamos tecnologia de avanzada para detectar Phishing</h2>
-      <div class="countdown d-flex justify-content-center" data-count="2023/10/25">
-        <div>
-          <h3>%d</h3>
-          <h4>Days</h4>
-        </div>
-        <div>
-          <h3>%h</h3>
-          <h4>Hours</h4>
-        </div>
-        <div>
-          <h3>%m</h3>
-          <h4>Minutes</h4>
-        </div>
-        <div>
-          <h3>%s</h3>
-          <h4>Seconds</h4>
-        </div>
-      </div>
+      <h2>Utilizamos tecnologia de avanzada para detectar Phishing</h2> 
 
       <div class="subscribe">
-        <h4>Ingrese el mensaje de supuesto Phishing para analizar</h4>
-        <form action="forms/notify.php" method="post" role="form" class="php-email-form" style="width: 800px; height: 600px;">
+        <h4>Ingrese el mensaje a Analizar</h4>
+       
+        <form style="width: 800px; height: 600px;" method="post">
+
+          {% csrf_token %}
           <div class="subscribe-form">
-            <input type="text" name="text" required><input type="submit" value="Subscribe">
+            <textarea id="textAreaEmail" name="textAreaEmail" rows="4" cols="50" style="border: none;border-radius: 15px;outline: none; padding: 5px;height: 400px;width: 600px;resize: none;"></textarea>
+            <button type="submit" class="submitButton">Analizar</button>
           </div>
           <div class="mt-2">
             <div class="loading">Loading</div>
@@ -72,6 +58,8 @@
           </div>
         </form>
       </div>
+      
+  
 
       <div class="social-links text-center">
         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -82,83 +70,6 @@
 
     </div>
   </header><!-- End #header -->
-
-  <main id="main">
-
-    <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>About Us</h2>
-          <p>Illo velit quae dolorem voluptate pireda notila set. Corrupti voluptatum tempora iste ratione deleniti corrupti nostrum ut</p>
-        </div>
-
-        <div class="row mt-2">
-          <div class="col-lg-4 col-md-6 icon-box">
-            <div class="icon"><i class="bi bi-briefcase"></i></div>
-            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box">
-            <div class="icon"><i class="bi bi-bar-chart"></i></div>
-            <h4 class="title"><a href="">Dolor Sitema</a></h4>
-            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box">
-            <div class="icon"><i class="bi bi-brightness-high"></i></div>
-            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End About Us Section -->
-
-    <!-- ======= Contact Us Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Contact Us</h2>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="form-group col-md-6">
-                  <label for="name">Your Name</label>
-                  <input type="text" name="name" class="form-control" id="name" required>
-                </div>
-                <div class="form-group col-md-6 mt-3 mt-md-0">
-                  <label for="name">Your Email</label>
-                  <input type="email" class="form-control" name="email" id="email" required>
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <label for="name">Subject</label>
-                <input type="text" class="form-control" name="subject" id="subject" required>
-              </div>
-              <div class="form-group mt-3">
-                <label for="name">Message</label>
-                <textarea class="form-control" name="message" rows="10" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Contact Us Section -->
-
-  </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer">

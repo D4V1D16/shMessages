@@ -5,11 +5,23 @@ import joblib
 import pickle
 import matplotlib.pyplot as plt
 import seaborn as sns
+import spacy
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import KFold,GridSearchCV,StratifiedKFold
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from xgboost import XGBClassifier
+
+##NLP en español
+nlp = spacy.load("es_core_news_sm")
+##
+# Función para preprocesar el texto en español
+def preprocess_text(text):
+    doc = nlp(text)
+    # Realiza lematización y eliminación de stopwords aquí
+    processed_text = " ".join([token.lemma_ for token in doc if not token.is_stop])
+    return processed_text
+
 
 # Función para leer los datos
 def read_data(file_path):
@@ -62,12 +74,12 @@ def load_or_train_model():
         print("Entrenamiento necesario. Entrenando el modelo y guardando los datos de entrenamiento...")
         
         # Se ingresa el dataset de correos con phishing y no phishing
-        data = pd.read_csv('C:/Jean Stuff/Programacion/shMessages-main/shMessages-main/shMessages/proyecto/ia/Phishing_Email.csv')
+        data = pd.read_csv('./Phishing_Email.csv')
         print(data.head())
         print(data['Email Type'].value_counts())
 
         # Se divide el dataset en conjuntos de entrenamiento y prueba
-        X, y = read_data('C:/Jean Stuff/Programacion/shMessages-main/shMessages-main/shMessages/proyecto/ia/Phishing_Email.csv')
+        X, y = read_data('./Phishing_Email.csv')
         num_folds = 5
         kfold = StratifiedKFold(n_splits=num_folds, shuffle=True, random_state=42)
         print(X.shape, y.shape)
@@ -160,7 +172,10 @@ def main():
         
         if user_input.lower() == 'salir':
             break
-        result = predict_phishing(user_input, model, vectorizer)
+
+        # Preprocesa el texto en español
+        processed_input = preprocess_text(user_input)
+        result = predict_phishing(processed_input, model, vectorizer)
         if result == 1:
             print("El mensaje SI es un correo de phishing.")
         else:
