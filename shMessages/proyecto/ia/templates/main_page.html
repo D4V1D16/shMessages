@@ -48,23 +48,26 @@
 
           {% csrf_token %}
           <div class="subscribe-form">
-            <label for="email_text">Mensaje de Correo Electrónico:</label>
-            <textarea id="email_text" name="email_text" rows="4" cols="50" style="border: none;border-radius: 15px;outline: none; padding: 5px;height: 400px;width: 600px;resize: none;"></textarea>
             
-            <button type="submit" class="submitButton" value="Detectar Phishing">Analizar</button>
-          </div>
-          <div id="result">
+            <textarea id="email_text" name="email_text" rows="4" cols="50" style="border: none;border-radius: 0.938em;outline: none; padding: 0.313em;height: 25em;width: 37.5em;resize: none;"></textarea>
+            <div class="button-container" style="display: inline-flex;  margin-top: 20px;">
+              <button type="submit" class="submitButton" value="Detectar Phishing" style=" display: flex;margin: 45px;padding: 20px 50px;position: relative;text-decoration: none;letter-spacing: 10px;border: 3px solid;background-color: #03f095;overflow: hidden;">Analizar</button>
 
-          </div>
+              <button type="button" class="cleanButton" id="clearButton" onclick="clearTextArea()" style="display: flex; margin: 45px; padding: 20px 50px; position: relative;text-decoration: none;letter-spacing: 10px;border: 3px solid;background-color: #2692d1;overflow: hidden; ">Limpiar</button>
+            
+          
 
           
         </form>
       </div>
+      <div id="result">
+
+      </div>
       
-  
-      <br>
-      <br>
-      <br>
+
+      
+      
+      
       <div class="social-links text-center">
         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -79,7 +82,7 @@
   <footer id="footer">
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Periferia IT Group</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>SHmessages</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
@@ -121,17 +124,24 @@
                     resultDiv.innerHTML = 'El mensaje SI es un correo de phishing.';
                     resultDiv.style.fontSize = '24px'; // Tamaño de fuente más grande
                     resultDiv.style.fontWeight = 'bold'; // Texto en negrita
-                    resultDiv.style.color = 'red'; // Color de texto rojo (cambiarlo según tus preferencias)
+                    resultDiv.style.color = 'white'; // Color de texto rojo (cambiarlo según tus preferencias)
+                    resultDiv.style.border = '2px solid red';
 
                 } else {
                     resultDiv.innerHTML = 'El mensaje NO es un correo de phishing.';
                     resultDiv.style.fontSize = '24px'; // Tamaño de fuente más grande
                     resultDiv.style.fontWeight = 'bold'; // Texto en negrita
-                    resultDiv.style.color = 'White'; // Color de texto rojo (cambiarlo según tus preferencias)
+                    resultDiv.style.color = 'white'; // Color de texto rojo (cambiarlo según tus preferencias)
+                    resultDiv.style.border = '2px solid green';
                 }
             }
         });
     });
+
+    function clearTextArea() {
+    document.getElementById('email_text').value = '';
+    }
+
 </script>
   <!-- <script src="{% static '/assets/js/main.js' %}"></script> -->
 
