@@ -9,20 +9,29 @@ from langdetect import detect
 model, vectorizer = load_or_train_model()
 translator = Translator()
 # Create your views here.
-@csrf_protect
+
+
+def translate_to_english(text):
+    # Traduce el texto del español al inglés
+    translated = translator.translate(text, src='es', dest='en')
+    return translated.text
+
 def main(request):
     if request.method == 'POST':
-        user_input = request.POST['email_text']
+        user_input = request.POST.get('email_text', '')  # Utiliza request.POST.get para obtener el valor de 'email_text'
+
         if user_input:
             # Detectar el idioma del texto de entrada
             detected_language = detect(user_input)
 
             if detected_language == 'es':
                 # Si el idioma detectado es español, preprocesar el texto traducido
-                processed_input = preprocess_text(translate_to_english(user_input))
+                processed_input = preprocess_text(translate_to_english(user_input), detected_language)
+
             else:
                 # Si el idioma detectado no es español, preprocesar el texto directamente
-                processed_input = preprocess_text(user_input)
+                processed_input = preprocess_text(translate_to_english(user_input), detected_language)
+
 
             # Realizar la predicción
             result = predict_phishing(processed_input, model, vectorizer)
@@ -30,9 +39,3 @@ def main(request):
             return JsonResponse({'result': int(result)})
     
     return render(request, 'main_page.html')
-
-
-def translate_to_english(text):
-    # Traduce el texto del español al inglés
-    translated = translator.translate(text, src='es', dest='en')
-    return translated.text

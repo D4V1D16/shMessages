@@ -14,16 +14,25 @@ from xgboost import XGBClassifier
 from googletrans import Translator
 
 
-##NLP en español
-nlp = spacy.load("es_core_news_sm")
+
+##NLP en español e ingles
+nlp_es = spacy.load("es_core_news_sm")
+nlp_en = spacy.load("en_core_web_sm")
 ##
 
 
-# Función para preprocesar el texto en español
-def preprocess_text(text):
-    doc = nlp(text)
-    # Realiza lematización y eliminación de stopwords aquí
+# Función para preprocesar el texto en español e inglés
+def preprocess_text(text, language):
+    if language == 'es':
+        doc = nlp_es(text)
+    elif language == 'en':
+        doc = nlp_en(text)
+    else:
+        raise ValueError("Idioma no compatible. Utilice 'es' o 'en'.")
+
+    # Lematizar y eliminar palabras vacías
     processed_text = " ".join([token.lemma_ for token in doc if not token.is_stop])
+
     return processed_text
 
 
@@ -181,9 +190,9 @@ def main():
             processed_input = preprocess_text(english_text)
             result = predict_phishing(processed_input, model, vectorizer)
             if result == 1:
-                print("\nEl mensaje SI es un correo de phishing.\n")
+                print("\n El mensaje SI es un correo de phishing. \n")
             else:
-                print("\nEl mensaje NO es un correo de phishing.\n")
+                print("\n El mensaje NO es un correo de phishing. \n")
         except Exception as e:
             print(f"Error al traducir o procesar el texto: {str(e)}")
 
